@@ -22,15 +22,15 @@ namespace LogicAppCreator
     ""triggers"" : {}
 } }";
 
-        private readonly ILogicAppActionInternal _trigger;
+        private readonly ILogicAppTrigger _trigger;
         private readonly IList<ILogicAppAction> _actions = new List<ILogicAppAction>();
-        private ILogicAppActionInternal _lastAction;
+        private ILogicAppAction _lastAction;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TriggeredLogicApp"/> class.
         /// </summary>
         /// <param name="trigger">The trigger.</param>
-        public TriggeredLogicApp(ILogicAppTrigger trigger) => _trigger = (ILogicAppActionInternal)trigger;
+        public TriggeredLogicApp(ILogicAppTrigger trigger) => _trigger = trigger;
 
         /// <summary>
         /// Generates the json object.
@@ -40,7 +40,7 @@ namespace LogicAppCreator
         {
             var jsonObj = JToken.Parse(LA_SCAFFOLDING);
 
-            var actionsJobject = _trigger.GetActionJson().SingleOrDefault();
+            var actionsJobject = ((ICanHaveActionsInternal)_trigger).GetJsonForActions().SingleOrDefault();
 
             jsonObj
                 [@"definition"]
@@ -55,13 +55,6 @@ namespace LogicAppCreator
         }
 
         /// <summary>
-        /// Generates the json object.
-        /// </summary>
-        /// <param name="intoJtoken">The into jtoken.</param>
-        /// <returns></returns>
-        public JToken GenerateJsonObject(JToken intoJtoken) => GenerateJsonObject();    // the top-level logic app generates the whole doc; never *in to* anything
-
-        /// <summary>
         /// Thens the action.
         /// </summary>
         /// <param name="action">The action.</param>
@@ -70,14 +63,14 @@ namespace LogicAppCreator
         {
             if (_lastAction == null)
             {
-                _trigger.AddAction(action);
+                ((ICanHaveActionsInternal)_trigger).AddAction(action);
             }
             else
             {
-                _lastAction.AddAction(action);
+                ((ICanHaveActionsInternal)_lastAction).AddAction(action);
             }
 
-            _lastAction = (ILogicAppActionInternal)action;
+            _lastAction = action;
 
             return this;
         }

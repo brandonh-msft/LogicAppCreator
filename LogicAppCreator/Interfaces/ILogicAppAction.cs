@@ -3,16 +3,11 @@
     /// <summary>
     /// 
     /// </summary>
-    public interface ILogicAppAction : IGenerateJson
+    public interface ILogicAppAction : ILogicAppBlock, ICanHaveActions
     {
         /// <summary>
-        /// Gets the name.
+        /// Gets the run after.
         /// </summary>
-        string Name { get; }
-
-        /// <summary>
-        /// Gets the type.
-        /// </summary>
-        string Type { get; }
+        RunAfter RunAfter { get; }
     }
 }

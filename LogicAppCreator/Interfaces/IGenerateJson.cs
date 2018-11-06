@@ -24,13 +24,6 @@ namespace LogicAppCreator
             /// </summary>
             /// <returns></returns>
             JToken GenerateJsonObject();
-
-            /// <summary>
-            /// Generates the json object.
-            /// </summary>
-            /// <param name="intoJtoken">The into jtoken.</param>
-            /// <returns></returns>
-            JToken GenerateJsonObject(JToken intoJtoken);
         }
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Net.Http;
 using LogicAppCreator;
 using LogicAppCreator.Actions;
-using LogicAppCreator.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 

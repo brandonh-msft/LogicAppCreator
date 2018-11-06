@@ -4,6 +4,81 @@
         <name>LogicAppCreator</name>
     </assembly>
     <members>
+        <member name="T:LogicAppCreator.ActionResult">
+            <summary></summary>
+        </member>
+        <member name="F:LogicAppCreator.ActionResult.Succeeded">
+            <summary>
+            The succeeded
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.ActionResult.TimedOut">
+            <summary>
+            The timed out
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.ActionResult.Skipped">
+            <summary>
+            The skipped
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.ActionResult.Failed">
+            <summary>
+            The failed
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.ActionResult.Any">
+            <summary>
+            Any
+            </summary>
+        </member>
+        <member name="T:LogicAppCreator.Actions.GenericAction">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:LogicAppCreator.Interfaces.Internal.ILogicAppActionInternal" />
+        </member>
+        <member name="M:LogicAppCreator.Actions.GenericAction.#ctor(System.String,System.String,LogicAppCreator.RunAfter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.GenericAction" /> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="type">The type.</param>
+            <param name="runAfter">The run after.</param>
+        </member>
+        <member name="P:LogicAppCreator.Actions.GenericAction.Name">
+            <summary>
+            Gets the name.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Actions.GenericAction.Type">
+            <summary>
+            Gets the type.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Actions.GenericAction.RunAfter">
+            <summary>
+            Gets the run after.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Actions.GenericAction.Inputs">
+            <summary>
+            Gets the inputs.
+            </summary>
+        </member>
+        <member name="M:LogicAppCreator.Actions.GenericAction.GenerateJsonObject">
+            <summary>
+            Generates the json object.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:LogicAppCreator.Actions.GenericAction.SetRunAfter(LogicAppCreator.RunAfter)">
+            <summary>
+            Sets the run after.
+            </summary>
+            <param name="runAfter">The run after.</param>
+        </member>
         <member name="T:LogicAppCreator.Actions.HttpAction">
             <summary>
             
@@ -54,29 +129,23 @@
             <param name="queryParameters">The query parameters.</param>
             <param name="actionName">Name of the action.</param>
         </member>
-        <member name="P:LogicAppCreator.Actions.HttpAction.Name">
+        <member name="M:LogicAppCreator.Actions.HttpAction.#ctor(System.Net.Http.HttpMethod,System.Uri,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.String)">
             <summary>
-            Gets the name.
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.HttpAction" /> class.
             </summary>
+            <param name="method">The method.</param>
+            <param name="url">The URL.</param>
+            <param name="headers">The headers.</param>
+            <param name="queryParameters">The query parameters.</param>
+            <param name="actionName">Name of the action.</param>
         </member>
-        <member name="P:LogicAppCreator.Actions.HttpAction.Type">
-            <summary>
-            Gets the type.
-            </summary>
+        <member name="T:LogicAppCreator.Interfaces.ICanHaveActions">
+            <summary></summary>
         </member>
-        <member name="M:LogicAppCreator.Actions.HttpAction.GenerateJsonObject">
+        <member name="P:LogicAppCreator.Interfaces.ICanHaveActions.Actions">
             <summary>
-            Generates the json object.
+            Gets the actions.
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:LogicAppCreator.Actions.HttpAction.GenerateJsonObject(Newtonsoft.Json.Linq.JToken)">
-            <summary>
-            Generates the json object.
-            </summary>
-            <param name="intoJtoken">The into jtoken.</param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="T:LogicAppCreator.Interfaces.IGenerateJson">
             <summary></summary>
@@ -87,34 +156,25 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:LogicAppCreator.Interfaces.IGenerateJson.GenerateJsonObject(Newtonsoft.Json.Linq.JToken)">
-            <summary>
-            Generates the json object.
-            </summary>
-            <param name="intoJtoken">The into jtoken.</param>
-            <returns></returns>
-        </member>
-        <member name="T:LogicAppCreator.Interfaces.GenerateJsonExtensions">
-            <summary></summary>
-        </member>
-        <member name="M:LogicAppCreator.Interfaces.GenerateJsonExtensions.GenerateJson(LogicAppCreator.Interfaces.IGenerateJson)">
-            <summary>
-            Generates the json.
-            </summary>
-            <param name="igen">The igen.</param>
-            <returns></returns>
-        </member>
         <member name="T:LogicAppCreator.Interfaces.ILogicAppAction">
             <summary>
             
             </summary>
         </member>
-        <member name="P:LogicAppCreator.Interfaces.ILogicAppAction.Name">
+        <member name="P:LogicAppCreator.Interfaces.ILogicAppAction.RunAfter">
+            <summary>
+            Gets the run after.
+            </summary>
+        </member>
+        <member name="T:LogicAppCreator.Interfaces.ILogicAppBlock">
+            <summary></summary>
+        </member>
+        <member name="P:LogicAppCreator.Interfaces.ILogicAppBlock.Name">
             <summary>
             Gets the name.
             </summary>
         </member>
-        <member name="P:LogicAppCreator.Interfaces.ILogicAppAction.Type">
+        <member name="P:LogicAppCreator.Interfaces.ILogicAppBlock.Type">
             <summary>
             Gets the type.
             </summary>
@@ -125,20 +185,20 @@
             </summary>
             <seealso cref="T:LogicAppCreator.Interfaces.IGenerateJson" />
         </member>
-        <member name="P:LogicAppCreator.Interfaces.ILogicAppTrigger.Name">
-            <summary>
-            Gets the name.
-            </summary>
-        </member>
         <member name="P:LogicAppCreator.Interfaces.ILogicAppTrigger.Kind">
             <summary>
             Gets the kind.
             </summary>
         </member>
-        <member name="P:LogicAppCreator.Interfaces.ILogicAppTrigger.Type">
+        <member name="T:LogicAppCreator.GenerateJsonExtensions">
+            <summary></summary>
+        </member>
+        <member name="M:LogicAppCreator.GenerateJsonExtensions.GenerateJson(LogicAppCreator.Interfaces.IGenerateJson)">
             <summary>
-            Gets the type.
+            Generates the json.
             </summary>
+            <param name="igen">The igen.</param>
+            <returns></returns>
         </member>
         <member name="T:LogicAppCreator.LogicApp">
             <summary></summary>
@@ -149,6 +209,24 @@
             </summary>
             <param name="trigger">The trigger.</param>
             <returns></returns>
+        </member>
+        <member name="T:LogicAppCreator.RunAfter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.RunAfter.ActionName">
+            <summary>
+            Gets or sets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:LogicAppCreator.RunAfter.ResultMask">
+            <summary>
+            Gets or sets the result mask.
+            </summary>
         </member>
         <member name="T:LogicAppCreator.TriggeredLogicApp">
             <summary>
@@ -166,13 +244,6 @@
             <summary>
             Generates the json object.
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:LogicAppCreator.TriggeredLogicApp.GenerateJsonObject(Newtonsoft.Json.Linq.JToken)">
-            <summary>
-            Generates the json object.
-            </summary>
-            <param name="intoJtoken">The into jtoken.</param>
             <returns></returns>
         </member>
         <member name="M:LogicAppCreator.TriggeredLogicApp.ThenAction(LogicAppCreator.Interfaces.ILogicAppAction)">
@@ -225,14 +296,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:LogicAppCreatorTests.HttpTrigger.GenerateJsonObject(Newtonsoft.Json.Linq.JToken)">
-            <summary>
-            Generates the json object.
-            </summary>
-            <param name="intoJtoken">The into jtoken.</param>
-            <returns></returns>
-        </member>
-        <member name="M:LogicAppCreatorTests.HttpTrigger.LogicAppCreator#Interfaces#Internal#ILogicAppActionInternal#GetActionJson">
+        <member name="M:LogicAppCreatorTests.HttpTrigger.LogicAppCreator#Interfaces#Internal#ICanHaveActionsInternal#GetJsonForActions">
             <summary>
             Gets the action json.
             </summary>

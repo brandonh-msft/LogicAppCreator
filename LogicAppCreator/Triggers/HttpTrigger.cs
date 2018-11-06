@@ -12,11 +12,10 @@ namespace LogicAppCreatorTests
     /// </summary>
     /// <seealso cref="LogicAppCreator.Interfaces.ILogicAppTrigger" />
     /// <seealso cref="LogicAppCreator.Interfaces.Internal.ILogicAppActionInternal" />
-    public class HttpTrigger : ILogicAppTrigger, ILogicAppActionInternal
+    public class HttpTrigger : ILogicAppTrigger, ICanHaveActionsInternal
     {
         private readonly string _relativePath;
         private readonly HttpMethod _method;
-        private readonly IList<ILogicAppAction> _actions = new List<ILogicAppAction>();
         private string _bodySchema;
 
         /// <summary>
@@ -91,21 +90,17 @@ namespace LogicAppCreatorTests
             });
         }
 
-        void ILogicAppActionInternal.AddAction(ILogicAppAction action) => _actions.Add(action);
+        IList<ILogicAppAction> ICanHaveActions.Actions { get; } = new List<ILogicAppAction>();
 
-        /// <summary>
-        /// Generates the json object.
-        /// </summary>
-        /// <param name="intoJtoken">The into jtoken.</param>
-        /// <returns></returns>
-        public JToken GenerateJsonObject(JToken intoJtoken) => GenerateJsonObject();
+        void ICanHaveActionsInternal.AddAction(ILogicAppAction action) => ((ICanHaveActions)this).Actions.Add(action);
+
         /// <summary>
         /// Gets the action json.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<JToken> ILogicAppActionInternal.GetActionJson()
+        IEnumerable<JToken> ICanHaveActionsInternal.GetJsonForActions()
         {
-            foreach (var action in _actions)
+            foreach (var action in ((ICanHaveActions)this).Actions)
             {
                 yield return action.GenerateJsonObject();
             }
