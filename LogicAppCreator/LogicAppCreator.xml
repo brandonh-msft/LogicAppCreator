@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LogicAppCreator</name>
+    </assembly>
+    <members>
+        <member name="T:LogicAppCreator.IGenerateJson">
+            <summary></summary>
+        </member>
+        <member name="M:LogicAppCreator.IGenerateJson.GenerateJsonObject">
+            <summary>
+            Generates the json object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:LogicAppCreator.GenerateJsonExtensions">
+            <summary></summary>
+        </member>
+        <member name="M:LogicAppCreator.GenerateJsonExtensions.GenerateJson(LogicAppCreator.IGenerateJson)">
+            <summary>
+            Generates the json.
+            </summary>
+            <param name="igen">The igen.</param>
+            <returns></returns>
+        </member>
+        <member name="T:LogicAppCreator.ILogicAppTrigger">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:LogicAppCreator.IGenerateJson" />
+        </member>
+        <member name="T:LogicAppCreator.LogicApp">
+            <summary></summary>
+        </member>
+        <member name="M:LogicAppCreator.LogicApp.WithTrigger(LogicAppCreator.ILogicAppTrigger)">
+            <summary>
+            Withes the trigger.
+            </summary>
+            <param name="trigger">The trigger.</param>
+            <returns></returns>
+        </member>
+        <member name="T:LogicAppCreator.TriggeredLogicApp">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:LogicAppCreator.IGenerateJson" />
+        </member>
+        <member name="M:LogicAppCreator.TriggeredLogicApp.#ctor(LogicAppCreator.ILogicAppTrigger,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LogicAppCreator.TriggeredLogicApp"/> class.
+            </summary>
+            <param name="trigger">The trigger.</param>
+            <param name="triggerName">Name of the trigger.</param>
+        </member>
+        <member name="M:LogicAppCreator.TriggeredLogicApp.GenerateJsonObject">
+            <summary>
+            Generates the json object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:LogicAppCreatorTests.HttpTrigger">
+            <summary></summary>
+            <seealso cref="T:LogicAppCreator.ILogicAppTrigger" />
+        </member>
+        <member name="M:LogicAppCreatorTests.HttpTrigger.#ctor(System.Net.Http.HttpMethod,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LogicAppCreatorTests.HttpTrigger"/> class.
+            </summary>
+            <param name="method">The method.</param>
+            <param name="name">The name.</param>
+            <param name="bodySchema">The body schema.</param>
+            <param name="relativePath">The relative path.</param>
+        </member>
+        <member name="M:LogicAppCreatorTests.HttpTrigger.SetBodySchemaFromSample(System.String)">
+            <summary>
+            Sets the body schema from sample.
+            </summary>
+            <param name="jsonBodySample">The json body sample.</param>
+        </member>
+        <member name="M:LogicAppCreatorTests.HttpTrigger.GenerateJsonObject">
+            <summary>
+            Generates the json object.
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

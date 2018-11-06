@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicAppCreator", "LogicAppCreator\LogicAppCreator.csproj", "{7C9A4ED2-4A3E-4DF4-9977-6ACAC9E73038}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicAppCreatorTests", "LogicAppCreatorTests\LogicAppCreatorTests.csproj", "{3795EA6C-F316-4FC1-8A6D-CCC908FB4ED6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7C9A4ED2-4A3E-4DF4-9977-6ACAC9E73038}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C9A4ED2-4A3E-4DF4-9977-6ACAC9E73038}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C9A4ED2-4A3E-4DF4-9977-6ACAC9E73038}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3795EA6C-F316-4FC1-8A6D-CCC908FB4ED6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3795EA6C-F316-4FC1-8A6D-CCC908FB4ED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3795EA6C-F316-4FC1-8A6D-CCC908FB4ED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3795EA6C-F316-4FC1-8A6D-CCC908FB4ED6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
