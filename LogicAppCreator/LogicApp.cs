@@ -1,4 +1,6 @@
-﻿namespace LogicAppCreator
+﻿using LogicAppCreator.Interfaces;
+
+namespace LogicAppCreator
 {
     /// <summary></summary>
     public sealed class LogicApp
