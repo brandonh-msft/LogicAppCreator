@@ -73,12 +73,6 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:LogicAppCreator.Actions.GenericAction.SetRunAfter(LogicAppCreator.RunAfter)">
-            <summary>
-            Sets the run after.
-            </summary>
-            <param name="runAfter">The run after.</param>
-        </member>
         <member name="T:LogicAppCreator.Actions.HttpAction">
             <summary>
             
@@ -161,11 +155,6 @@
             
             </summary>
         </member>
-        <member name="P:LogicAppCreator.Interfaces.ILogicAppAction.RunAfter">
-            <summary>
-            Gets the run after.
-            </summary>
-        </member>
         <member name="T:LogicAppCreator.Interfaces.ILogicAppBlock">
             <summary></summary>
         </member>
@@ -188,6 +177,11 @@
         <member name="P:LogicAppCreator.Interfaces.ILogicAppTrigger.Kind">
             <summary>
             Gets the kind.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Interfaces.Internal.ILogicAppActionInternal.RunAfter">
+            <summary>
+            Gets the run after.
             </summary>
         </member>
         <member name="T:LogicAppCreator.GenerateJsonExtensions">
@@ -253,6 +247,13 @@
             <param name="action">The action.</param>
             <returns></returns>
         </member>
+        <member name="M:LogicAppCreator.TriggeredLogicApp.AndParallelAction(LogicAppCreator.Interfaces.ILogicAppAction)">
+            <summary>
+            Adds an action parallel to the last added action
+            </summary>
+            <param name="action">The action.</param>
+            <returns></returns>
+        </member>
         <member name="T:LogicAppCreatorTests.HttpTrigger">
             <summary>
             
@@ -284,7 +285,7 @@
             <param name="bodySchema">The body schema.</param>
             <param name="relativePath">The relative path.</param>
         </member>
-        <member name="M:LogicAppCreatorTests.HttpTrigger.SetBodySchemaFromSample(System.String)">
+        <member name="M:LogicAppCreatorTests.HttpTrigger.WithBodySchemaFromSample(System.String)">
             <summary>
             Sets the body schema from sample.
             </summary>

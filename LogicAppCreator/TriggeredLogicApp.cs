@@ -74,5 +74,19 @@ namespace LogicAppCreator
 
             return this;
         }
+
+        /// <summary>
+        /// Adds an action parallel to the last added action
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns></returns>
+        public TriggeredLogicApp AndParallelAction(ILogicAppAction action)
+        {
+            ((ICanHaveActionsInternal)_trigger).AddAction(action);
+
+            _lastAction = action;
+
+            return this;
+        }
     }
 }

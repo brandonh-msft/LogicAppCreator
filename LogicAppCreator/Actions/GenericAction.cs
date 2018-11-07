@@ -26,7 +26,11 @@ namespace LogicAppCreator.Actions
         {
             this.Name = name;
             this.Type = type;
-            this.RunAfter = runAfter;
+
+            if (runAfter != null)
+            {
+                this.RunAfter.Add(runAfter);
+            }
         }
 
         /// <summary>
@@ -42,7 +46,7 @@ namespace LogicAppCreator.Actions
         /// <summary>
         /// Gets the run after.
         /// </summary>
-        public RunAfter RunAfter { get; protected set; }
+        public IList<RunAfter> RunAfter { get; } = new List<RunAfter>();
 
         /// <summary>
         /// Gets the inputs.
@@ -67,16 +71,21 @@ namespace LogicAppCreator.Actions
                             this.Inputs.Select(i => new JProperty(i.name, i.value))
                         )
                     ),
-                    new JProperty("runAfter", this.RunAfter != null
-                        ?  new JProperty(this.RunAfter.ActionName,
-                                new JArray(this.RunAfter.ResultMask.ToString().Split(',').Select(i=>i.Trim())))
-                        : (JToken)new JObject()),
+                    new JProperty("runAfter", new JObject()),
                     new JProperty("type", this.Type)
                 )
-            )
-            };
+            )};
+
 
             var content = token[this.Name];
+
+            var runAfterObj = content.Value<JObject>("runAfter");
+            foreach (var ra in this.RunAfter)
+            {
+                runAfterObj.Add(
+                    new JProperty(ra.ActionName,
+                        new JArray(ra.ResultMask.ToString().Split(',').Select(i => i.Trim()))));
+            }
 
             try
             {
@@ -99,23 +108,17 @@ namespace LogicAppCreator.Actions
             return token;
         }
 
-        /// <summary>
-        /// Sets the run after.
-        /// </summary>
-        /// <param name="runAfter">The run after.</param>
-        public void SetRunAfter(RunAfter runAfter) => this.RunAfter = this.RunAfter;
-
         void ICanHaveActionsInternal.AddAction(ILogicAppAction action)
         {
             var actionInternal = (ILogicAppActionInternal)action;
             if (_lastAction == null)
             {
-                actionInternal.SetRunAfter(new RunAfter { ActionName = this.Name });
+                actionInternal.RunAfter.Add(new RunAfter { ActionName = this.Name });
                 _actions.Add(actionInternal);
             }
             else
             {
-                actionInternal.SetRunAfter(new RunAfter { ActionName = _lastAction.Name });
+                actionInternal.RunAfter.Add(new RunAfter { ActionName = _lastAction.Name });
                 ((ICanHaveActionsInternal)_lastAction).AddAction(actionInternal);
 
             }

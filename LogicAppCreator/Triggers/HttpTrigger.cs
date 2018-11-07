@@ -53,7 +53,11 @@ namespace LogicAppCreatorTests
         /// Sets the body schema from sample.
         /// </summary>
         /// <param name="jsonBodySample">The json body sample.</param>
-        public void SetBodySchemaFromSample(string jsonBodySample) => _bodySchema = new SampleJsonSchemaGenerator().Generate(jsonBodySample).ToJson();
+        public HttpTrigger WithBodySchemaFromSample(string jsonBodySample)
+        {
+            _bodySchema = new SampleJsonSchemaGenerator().Generate(jsonBodySample).ToJson();
+            return this;
+        }
 
         /// <summary>
         /// Generates the json object.
