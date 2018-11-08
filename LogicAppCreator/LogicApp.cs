@@ -10,6 +10,10 @@ namespace LogicAppCreator
         /// </summary>
         /// <param name="trigger">The trigger.</param>
         /// <returns></returns>
-        public TriggeredLogicApp WithTrigger(ILogicAppTrigger trigger) => new TriggeredLogicApp(trigger);
+        public ILogicAppTrigger WithTrigger(ILogicAppTrigger trigger)
+        {
+            trigger.AsInternalTrigger().ParentLogicApp = this;
+            return trigger;
+        }
     }
 }

@@ -32,11 +32,51 @@
             Any
             </summary>
         </member>
-        <member name="T:LogicAppCreator.Actions.GenericAction">
+        <member name="M:LogicAppCreator.ActionsHelpers.AddParallelActions``1(``0,LogicAppCreator.Interfaces.ILogicAppAction[])">
             <summary>
-            
+            Withes the parallel actions.
             </summary>
+            <param name="o">The o.</param>
+            <param name="actions">The actions.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LogicAppCreator.ActionsHelpers.AddFollowOnAction(LogicAppCreator.Interfaces.ILogicAppTrigger,LogicAppCreator.Interfaces.ILogicAppAction)">
+            <summary>
+            Thens the action.
+            </summary>
+            <param name="o">The o.</param>
+            <param name="newAction">The new action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LogicAppCreator.ActionsHelpers.AddFollowOnAction(LogicAppCreator.Interfaces.Internal.ILogicAppActionInternal,LogicAppCreator.Interfaces.ILogicAppAction)">
+            <summary>
+            Thens the action.
+            </summary>
+            <param name="o">The o.</param>
+            <param name="newAction">The new action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LogicAppCreator.ActionsHelpers.AddFollowOnActionImpl(LogicAppCreator.Interfaces.ICanHaveActions,LogicAppCreator.Interfaces.ILogicAppAction,System.String)">
+            <summary>
+            Thens the action.
+            </summary>
+            <param name="o">The o.</param>
+            <param name="newAction">The new action.</param>
+            <param name="myName">My name.</param>
+            <returns></returns>
+        </member>
+        <member name="T:LogicAppCreator.Actions.GenericAction">
+            <summary></summary>
             <seealso cref="T:LogicAppCreator.Interfaces.Internal.ILogicAppActionInternal" />
+        </member>
+        <member name="M:LogicAppCreator.Actions.GenericAction.#ctor(LogicAppCreator.Interfaces.ILogicAppTrigger,System.String,System.String,LogicAppCreator.RunAfter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.GenericAction" /> class.
+            </summary>
+            <param name="parentTrigger">The parent trigger.</param>
+            <param name="name">The name.</param>
+            <param name="type">The type.</param>
+            <param name="runAfter">The run after.</param>
         </member>
         <member name="M:LogicAppCreator.Actions.GenericAction.#ctor(System.String,System.String,LogicAppCreator.RunAfter)">
             <summary>
@@ -66,12 +106,31 @@
             Gets the inputs.
             </summary>
         </member>
+        <member name="P:LogicAppCreator.Actions.GenericAction.Trigger">
+            <summary>
+            Gets the trigger.
+            </summary>
+        </member>
         <member name="M:LogicAppCreator.Actions.GenericAction.GenerateJsonObject">
             <summary>
             Generates the json object.
             </summary>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:LogicAppCreator.Actions.GenericAction.WithParallelActions(LogicAppCreator.Interfaces.ILogicAppAction[])">
+            <summary>
+            Withes the parallel actions.
+            </summary>
+            <param name="actions">The actions.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LogicAppCreator.Actions.GenericAction.ThenAction(LogicAppCreator.Interfaces.ILogicAppAction)">
+            <summary>
+            Thens the action.
+            </summary>
+            <param name="newAction">The action.</param>
+            <returns></returns>
         </member>
         <member name="T:LogicAppCreator.Actions.HttpAction">
             <summary>
@@ -141,6 +200,16 @@
             Gets the actions.
             </summary>
         </member>
+        <member name="T:LogicAppCreator.Interfaces.ICanHaveActionsExtensions">
+            <summary></summary>
+        </member>
+        <member name="M:LogicAppCreator.Interfaces.ICanHaveActionsExtensions.AsInternalActions(LogicAppCreator.Interfaces.ICanHaveActions)">
+            <summary>
+            Ases the internal actions.
+            </summary>
+            <param name="a">a.</param>
+            <returns></returns>
+        </member>
         <member name="T:LogicAppCreator.Interfaces.IGenerateJson">
             <summary></summary>
         </member>
@@ -151,9 +220,24 @@
             <returns></returns>
         </member>
         <member name="T:LogicAppCreator.Interfaces.ILogicAppAction">
+            <summary></summary>
+        </member>
+        <member name="M:LogicAppCreator.Interfaces.ILogicAppAction.WithParallelActions(LogicAppCreator.Interfaces.ILogicAppAction[])">
             <summary>
-            
+            Withes the parallel actions.
             </summary>
+            <param name="actions">The actions.</param>
+            <returns></returns>
+        </member>
+        <member name="T:LogicAppCreator.Interfaces.ILogicAppActionExtensions">
+            <summary></summary>
+        </member>
+        <member name="M:LogicAppCreator.Interfaces.ILogicAppActionExtensions.AsInternalAction(LogicAppCreator.Interfaces.ILogicAppAction)">
+            <summary>
+            Ases the internal.
+            </summary>
+            <param name="a">a.</param>
+            <returns></returns>
         </member>
         <member name="T:LogicAppCreator.Interfaces.ILogicAppBlock">
             <summary></summary>
@@ -168,6 +252,13 @@
             Gets the type.
             </summary>
         </member>
+        <member name="M:LogicAppCreator.Interfaces.ILogicAppBlock.ThenAction(LogicAppCreator.Interfaces.ILogicAppAction)">
+            <summary>
+            Thens the action.
+            </summary>
+            <param name="action">The action.</param>
+            <returns></returns>
+        </member>
         <member name="T:LogicAppCreator.Interfaces.ILogicAppTrigger">
             <summary>
             
@@ -179,9 +270,44 @@
             Gets the kind.
             </summary>
         </member>
+        <member name="M:LogicAppCreator.Interfaces.ILogicAppTrigger.WithParallelActions(LogicAppCreator.Interfaces.ILogicAppAction[])">
+            <summary>
+            Withes the parallel actions.
+            </summary>
+            <param name="actions">The actions.</param>
+            <returns></returns>
+        </member>
+        <member name="T:LogicAppCreator.Interfaces.ILogicAppTriggerExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LogicAppCreator.Interfaces.ILogicAppTriggerExtensions.AsInternalTrigger(LogicAppCreator.Interfaces.ILogicAppTrigger)">
+            <summary>
+            Ases the internal.
+            </summary>
+            <param name="t">The t.</param>
+            <returns></returns>
+        </member>
         <member name="P:LogicAppCreator.Interfaces.Internal.ILogicAppActionInternal.RunAfter">
             <summary>
             Gets the run after.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Interfaces.Internal.ILogicAppActionInternal.Trigger">
+            <summary>
+            Gets or sets the trigger.
+            </summary>
+        </member>
+        <member name="T:LogicAppCreator.Interfaces.Internal.ILogicAppTriggerInternal">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:LogicAppCreator.Interfaces.ILogicAppTrigger" />
+        </member>
+        <member name="P:LogicAppCreator.Interfaces.Internal.ILogicAppTriggerInternal.ParentLogicApp">
+            <summary>
+            Gets or sets the parent logic application.
             </summary>
         </member>
         <member name="T:LogicAppCreator.GenerateJsonExtensions">
@@ -209,9 +335,15 @@
             
             </summary>
         </member>
+        <member name="M:LogicAppCreator.RunAfter.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LogicAppCreator.RunAfter"/> class.
+            </summary>
+            <param name="actionName">Name of the action.</param>
+        </member>
         <member name="P:LogicAppCreator.RunAfter.ActionName">
             <summary>
-            Gets or sets the name of the action.
+            Gets the name of the action.
             </summary>
             <value>
             The name of the action.
@@ -222,86 +354,89 @@
             Gets or sets the result mask.
             </summary>
         </member>
-        <member name="T:LogicAppCreator.TriggeredLogicApp">
+        <member name="T:LogicAppCreator.Triggers.BaseTrigger">
             <summary>
             
             </summary>
-            <seealso cref="T:LogicAppCreator.Interfaces.IGenerateJson" />
+            <seealso cref="T:LogicAppCreator.Interfaces.Internal.ILogicAppTriggerInternal" />
+            <seealso cref="T:LogicAppCreator.Interfaces.Internal.ICanHaveActionsInternal" />
         </member>
-        <member name="M:LogicAppCreator.TriggeredLogicApp.#ctor(LogicAppCreator.Interfaces.ILogicAppTrigger)">
+        <member name="F:LogicAppCreator.Triggers.BaseTrigger.LA_SCAFFOLDING">
             <summary>
-            Initializes a new instance of the <see cref="T:LogicAppCreator.TriggeredLogicApp"/> class.
+            The la scaffolding
             </summary>
-            <param name="trigger">The trigger.</param>
         </member>
-        <member name="M:LogicAppCreator.TriggeredLogicApp.GenerateJsonObject">
+        <member name="M:LogicAppCreator.Triggers.BaseTrigger.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Triggers.BaseTrigger"/> class.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Triggers.BaseTrigger.Inputs">
+            <summary>
+            Gets the inputs.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Triggers.BaseTrigger.Kind">
+            <summary>
+            Gets the kind.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Triggers.BaseTrigger.Name">
+            <summary>
+            Gets the name.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Triggers.BaseTrigger.Type">
+            <summary>
+            Gets the type.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Triggers.BaseTrigger.LogicAppCreator#Interfaces#ICanHaveActions#Actions">
+            <summary>
+            Gets the actions.
+            </summary>
+        </member>
+        <member name="M:LogicAppCreator.Triggers.BaseTrigger.GenerateJsonObject">
             <summary>
             Generates the json object.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:LogicAppCreator.TriggeredLogicApp.ThenAction(LogicAppCreator.Interfaces.ILogicAppAction)">
+        <member name="M:LogicAppCreator.Triggers.BaseTrigger.WithParallelActions(LogicAppCreator.Interfaces.ILogicAppAction[])">
+            <summary>
+            Withes the parallel actions.
+            </summary>
+            <param name="actions">The actions.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LogicAppCreator.Triggers.BaseTrigger.ThenAction(LogicAppCreator.Interfaces.ILogicAppAction)">
             <summary>
             Thens the action.
             </summary>
-            <param name="action">The action.</param>
+            <param name="newAction">The new action.</param>
             <returns></returns>
         </member>
-        <member name="M:LogicAppCreator.TriggeredLogicApp.AndParallelAction(LogicAppCreator.Interfaces.ILogicAppAction)">
-            <summary>
-            Adds an action parallel to the last added action
-            </summary>
-            <param name="action">The action.</param>
-            <returns></returns>
-        </member>
-        <member name="T:LogicAppCreatorTests.HttpTrigger">
+        <member name="T:LogicAppCreator.Triggers.HttpTrigger">
             <summary>
             
             </summary>
-            <seealso cref="T:LogicAppCreator.Interfaces.ILogicAppTrigger" />
-            <seealso cref="T:LogicAppCreator.Interfaces.Internal.ILogicAppActionInternal" />
+            <seealso cref="T:LogicAppCreator.Interfaces.Internal.ILogicAppTriggerInternal" />
+            <seealso cref="T:LogicAppCreator.Interfaces.Internal.ICanHaveActionsInternal" />
         </member>
-        <member name="P:LogicAppCreatorTests.HttpTrigger.Name">
+        <member name="M:LogicAppCreator.Triggers.HttpTrigger.#ctor(System.Net.Http.HttpMethod,System.String,System.String,System.String)">
             <summary>
-            Gets the name.
-            </summary>
-        </member>
-        <member name="P:LogicAppCreatorTests.HttpTrigger.Kind">
-            <summary>
-            Gets the kind.
-            </summary>
-        </member>
-        <member name="P:LogicAppCreatorTests.HttpTrigger.Type">
-            <summary>
-            Gets the type.
-            </summary>
-        </member>
-        <member name="M:LogicAppCreatorTests.HttpTrigger.#ctor(System.Net.Http.HttpMethod,System.String,System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:LogicAppCreatorTests.HttpTrigger"/> class.
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Triggers.HttpTrigger"/> class.
             </summary>
             <param name="method">The method.</param>
             <param name="name">The name.</param>
             <param name="bodySchema">The body schema.</param>
             <param name="relativePath">The relative path.</param>
         </member>
-        <member name="M:LogicAppCreatorTests.HttpTrigger.WithBodySchemaFromSample(System.String)">
+        <member name="M:LogicAppCreator.Triggers.HttpTrigger.WithBodySchemaFromSample(System.String)">
             <summary>
             Sets the body schema from sample.
             </summary>
             <param name="jsonBodySample">The json body sample.</param>
-        </member>
-        <member name="M:LogicAppCreatorTests.HttpTrigger.GenerateJsonObject">
-            <summary>
-            Generates the json object.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:LogicAppCreatorTests.HttpTrigger.LogicAppCreator#Interfaces#Internal#ICanHaveActionsInternal#GetJsonForActions">
-            <summary>
-            Gets the action json.
-            </summary>
-            <returns></returns>
         </member>
     </members>
 </doc>

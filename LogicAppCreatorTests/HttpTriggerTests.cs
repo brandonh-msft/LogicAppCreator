@@ -2,6 +2,7 @@ using System;
 using System.Net.Http;
 using LogicAppCreator;
 using LogicAppCreator.Actions;
+using LogicAppCreator.Triggers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 
@@ -297,6 +298,174 @@ namespace LogicAppCreatorTests
             }
         }
     }");
+        }
+
+        [TestMethod]
+        public void CheckTriggerWith2ParallelHttpActions()
+        {
+            var la = new LogicApp()
+                .WithTrigger(new HttpTrigger(HttpMethod.Get))
+                .WithParallelActions(
+                     new HttpAction(HttpMethod.Get, @"https://bing.com"),
+                     new HttpAction(HttpMethod.Post, @"https://google.com", actionName: @"HTTP_2"))
+                .ThenAction(new HttpAction(HttpMethod.Put, @"https://azure.com", actionName: @"HTTP_3"));
+
+            CompareLogicAppToActual(la, @"{
+    ""definition"": {
+        ""$schema"": ""https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#"",
+        ""actions"": {
+                ""HTTP"": {
+                    ""inputs"": {
+                        ""method"": ""GET"",
+                    ""uri"": ""https://bing.com""
+                    },
+                ""runAfter"": { },
+                ""type"": ""Http""
+                },
+            ""HTTP_2"": {
+                    ""inputs"": {
+                        ""method"": ""POST"",
+                    ""uri"": ""https://google.com""
+                    },
+                ""runAfter"": { },
+                ""type"": ""Http""
+            },
+            ""HTTP_3"": {
+                    ""inputs"": {
+                        ""method"": ""PUT"",
+                    ""uri"": ""https://azure.com""
+                    },
+                ""runAfter"": {
+                        ""HTTP"": [
+                            ""Succeeded""
+                    ],
+                    ""HTTP_2"": [
+                        ""Succeeded""
+                    ]
+    },
+                ""type"": ""Http""
+            }
+        },
+        ""contentVersion"": ""1.0.0.0"",
+        ""outputs"": {},
+        ""parameters"": {},
+        ""triggers"": {
+            ""manual"": {
+                ""inputs"": {
+                    ""method"": ""GET"",
+                    ""schema"": {}
+                },
+                ""kind"": ""Http"",
+                ""type"": ""Request""
+            }
+        }
+    }
+}");
+        }
+
+        [TestMethod]
+        public void CreateTwoParallelSetsInSerial()
+        {
+            var la = new LogicApp()
+                .WithTrigger(new HttpTrigger(HttpMethod.Post))
+                .WithParallelActions(
+                    new HttpAction(HttpMethod.Get, @"https://bing.com"),
+                    new HttpAction(HttpMethod.Post, @"https://google.com", actionName: @"HTTP_2"))
+                .WithParallelActions(
+                    new HttpAction(HttpMethod.Put, @"https://azure.com", actionName: @"HTTP_3"),
+                    new HttpAction(HttpMethod.Delete, @"https://amazon.com", actionName: @"HTTP_4"));
+
+            this.TestContext.WriteLine(la.GenerateJson());
+        }
+
+        [TestMethod]
+        public void CreateTwoParallelSetsInSerialWithJoiningNoopAction()
+        {
+            var la = new LogicApp()
+                .WithTrigger(new HttpTrigger(HttpMethod.Post))
+                .WithParallelActions(
+                    new HttpAction(HttpMethod.Get, @"https://bing.com"),
+                    new HttpAction(HttpMethod.Post, @"https://google.com", actionName: @"HTTP_2"))
+                .ThenAction(new HttpAction(HttpMethod.Get, @"http://foo.bar", actionName: @"HTTP_5"))
+                .WithParallelActions(
+                    new HttpAction(HttpMethod.Put, @"https://azure.com", actionName: @"HTTP_3"),
+                    new HttpAction(HttpMethod.Delete, @"https://amazon.com", actionName: @"HTTP_4"));
+
+            CompareLogicAppToActual(la, @"{
+    ""definition"": {
+        ""$schema"": ""https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#"",
+        ""actions"": {
+                ""HTTP"": {
+                    ""inputs"": {
+                        ""method"": ""GET"",
+                    ""uri"": ""https://bing.com""
+                    },
+                ""runAfter"": { },
+                ""type"": ""Http""
+                },
+            ""HTTP_2"": {
+                    ""inputs"": {
+                        ""method"": ""POST"",
+                    ""uri"": ""https://google.com""
+                    },
+                ""runAfter"": { },
+                ""type"": ""Http""
+            },
+            ""HTTP_3"": {
+                    ""inputs"": {
+                        ""method"": ""PUT"",
+                    ""uri"": ""https://azure.com""
+                    },
+                ""runAfter"": {
+                        ""HTTP_5"": [
+                            ""Succeeded""
+                    ]
+    },
+                ""type"": ""Http""
+            },
+            ""HTTP_4"": {
+                ""inputs"": {
+                    ""method"": ""DELETE"",
+                    ""uri"": ""https://amazon.com""
+                },
+                ""runAfter"": {
+                    ""HTTP_5"": [
+                        ""Succeeded""
+                    ]
+                },
+                ""type"": ""Http""
+            },
+            ""HTTP_5"": {
+                ""inputs"": {
+                    ""method"": ""GET"",
+                    ""uri"": ""http://foo.bar""
+                },
+                ""runAfter"": {
+                    ""HTTP"": [
+                        ""Succeeded""
+                    ],
+                    ""HTTP_2"": [
+                        ""Succeeded""
+                    ]
+                },
+                ""type"": ""Http""
+            }
+        },
+        ""contentVersion"": ""1.0.0.0"",
+        ""outputs"": {},
+        ""parameters"": {},
+        ""triggers"": {
+            ""manual"": {
+                ""inputs"": {
+                    ""method"": ""POST"",
+                    ""schema"": {}
+                },
+                ""kind"": ""Http"",
+                ""type"": ""Request""
+            }
+        }
+    }
+}");
         }
     }
 }

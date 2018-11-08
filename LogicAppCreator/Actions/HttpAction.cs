@@ -36,7 +36,7 @@ namespace LogicAppCreator.Actions
         {
             if (body != null)
             {
-                this.Inputs.Add((@"body", body));
+                this.Inputs.Add(@"body", body);
             }
         }
 
@@ -64,7 +64,7 @@ namespace LogicAppCreator.Actions
         {
             if (!string.IsNullOrWhiteSpace(body))
             {
-                this.Inputs.Add((@"body", body));
+                this.Inputs.Add(@"body", body);
             }
         }
 
@@ -78,17 +78,17 @@ namespace LogicAppCreator.Actions
         /// <param name="actionName">Name of the action.</param>
         public HttpAction(HttpMethod method, Uri url, IEnumerable<(string, string)> headers = null, IEnumerable<(string, string)> queryParameters = null, string actionName = @"HTTP") : base(actionName, @"Http")
         {
-            this.Inputs.Add((@"method", method.ToString()));
-            this.Inputs.Add((@"uri", url.OriginalString));
+            this.Inputs.Add(@"method", method.ToString());
+            this.Inputs.Add(@"uri", url.OriginalString);
 
             if (headers?.Any() == true)
             {
-                this.Inputs.Add((@"headers", new JObject(headers.Select(t => new JProperty(t.Item1, t.Item2)))));
+                this.Inputs.Add(@"headers", new JObject(headers.Select(t => new JProperty(t.Item1, t.Item2))));
             }
 
             if (queryParameters?.Any() == true)
             {
-                this.Inputs.Add((@"queries", new JObject(queryParameters.Select(t => new JProperty(t.Item1, t.Item2)))));
+                this.Inputs.Add(@"queries", new JObject(queryParameters.Select(t => new JProperty(t.Item1, t.Item2))));
             }
         }
     }

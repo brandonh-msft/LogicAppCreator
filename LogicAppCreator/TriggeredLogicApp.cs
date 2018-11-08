@@ -12,25 +12,21 @@ namespace LogicAppCreator
     /// <seealso cref="LogicAppCreator.Interfaces.IGenerateJson" />
     public sealed class TriggeredLogicApp : IGenerateJson
     {
-        private const string LA_SCAFFOLDING = @"{
-""definition"" : {
-    ""$schema"" : ""https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#"",
-    ""actions"" : {},
-    ""contentVersion"" : ""1.0.0.0"",
-    ""outputs"" : {},
-    ""parameters"" : {},
-    ""triggers"" : {}
-} }";
 
-        private readonly ILogicAppTrigger _trigger;
+        private readonly ILogicAppTriggerInternal _trigger;
         private readonly IList<ILogicAppAction> _actions = new List<ILogicAppAction>();
-        private ILogicAppAction _lastAction;
+        private readonly ILogicAppAction _lastAction;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TriggeredLogicApp"/> class.
         /// </summary>
         /// <param name="trigger">The trigger.</param>
-        public TriggeredLogicApp(ILogicAppTrigger trigger) => _trigger = trigger;
+        public TriggeredLogicApp(ILogicAppTrigger trigger)
+        {
+            _trigger = (ILogicAppTriggerInternal)trigger;
+
+            _trigger.ParentLogicApp = this;
+        }
 
         /// <summary>
         /// Generates the json object.
@@ -40,7 +36,7 @@ namespace LogicAppCreator
         {
             var jsonObj = JToken.Parse(LA_SCAFFOLDING);
 
-            var actionsJobject = ((ICanHaveActionsInternal)_trigger).GetJsonForActions().SingleOrDefault();
+            var actionsJobject = _trigger.GetJsonForActions().SingleOrDefault();
 
             jsonObj
                 [@"definition"]
@@ -59,32 +55,38 @@ namespace LogicAppCreator
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns></returns>
-        public TriggeredLogicApp ThenAction(ILogicAppAction action)
+        public ILogicAppAction ThenAction(ILogicAppAction action)
         {
-            if (_lastAction == null)
+            if (_trigger.AsInternalActions().Actions.Any())
             {
-                ((ICanHaveActionsInternal)_trigger).AddAction(action);
-            }
-            else
-            {
-                ((ICanHaveActionsInternal)_lastAction).AddAction(action);
+                // Setting the runAfter for the new action to be based on any already-existing actions on the trigger
+                // effectively makes the new action a Join Action on parallel ones created on the trigger already.
+                // Then when this action is added to the trigger, it's really one that is positioned *after* all the
+                // actions already present since it depends on those
+                foreach (var a in _trigger.AsInternalActions().Actions)
+                {
+                    action.AsInternalAction().RunAfter.Add(new RunAfter(a.Name));
+                }
             }
 
-            _lastAction = action;
+            action.AsInternalAction().Trigger = _trigger;
+            _trigger.ThenAction(action);
 
-            return this;
+            return action;
         }
 
         /// <summary>
         /// Adds an action parallel to the last added action
         /// </summary>
-        /// <param name="action">The action.</param>
+        /// <param name="actions">The actions.</param>
         /// <returns></returns>
-        public TriggeredLogicApp AndParallelAction(ILogicAppAction action)
+        public TriggeredLogicApp ThenParallelActions(params ILogicAppAction[] actions)
         {
-            ((ICanHaveActionsInternal)_trigger).AddAction(action);
-
-            _lastAction = action;
+            foreach (var a in actions)
+            {
+                a.AsInternalAction().Trigger = _trigger;
+                _trigger.ThenAction(a);
+            }
 
             return this;
         }

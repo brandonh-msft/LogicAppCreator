@@ -6,12 +6,18 @@
     public class RunAfter
     {
         /// <summary>
-        /// Gets or sets the name of the action.
+        /// Initializes a new instance of the <see cref="RunAfter"/> class.
+        /// </summary>
+        /// <param name="actionName">Name of the action.</param>
+        public RunAfter(string actionName) => this.ActionName = actionName;
+
+        /// <summary>
+        /// Gets the name of the action.
         /// </summary>
         /// <value>
         /// The name of the action.
         /// </value>
-        public string ActionName { get; set; }
+        public string ActionName { get; private set; }
         /// <summary>
         /// Gets or sets the result mask.
         /// </summary>

@@ -12,5 +12,12 @@
         /// Gets the type.
         /// </summary>
         string Type { get; }
+
+        /// <summary>
+        /// Thens the action.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns></returns>
+        ILogicAppAction ThenAction(ILogicAppAction action);
     }
 }

@@ -7,14 +7,18 @@ using Newtonsoft.Json.Linq;
 
 namespace LogicAppCreator.Actions
 {
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <summary></summary>
     /// <seealso cref="LogicAppCreator.Interfaces.Internal.ILogicAppActionInternal" />
     public abstract class GenericAction : ILogicAppActionInternal, ICanHaveActionsInternal
     {
-        private readonly IList<ILogicAppAction> _actions = new List<ILogicAppAction>();
-        private ILogicAppActionInternal _lastAction;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GenericAction" /> class.
+        /// </summary>
+        /// <param name="parentTrigger">The parent trigger.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="type">The type.</param>
+        /// <param name="runAfter">The run after.</param>
+        protected GenericAction(ILogicAppTrigger parentTrigger, string name, string type, RunAfter runAfter = null) : this(name, type, runAfter) => this.Trigger = parentTrigger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericAction" /> class.
@@ -51,7 +55,12 @@ namespace LogicAppCreator.Actions
         /// <summary>
         /// Gets the inputs.
         /// </summary>
-        public IList<(string name, object value)> Inputs { get; } = new List<(string name, object value)>();
+        public IDictionary<string, object> Inputs { get; } = new Dictionary<string, object>();
+
+        /// <summary>
+        /// Gets the trigger.
+        /// </summary>
+        public ILogicAppTrigger Trigger { get; set; }
 
         IList<ILogicAppAction> ICanHaveActions.Actions { get; } = new List<ILogicAppAction>();
 
@@ -60,21 +69,38 @@ namespace LogicAppCreator.Actions
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public virtual JToken GenerateJsonObject()
+        public JToken GenerateJsonObject() => this.Trigger.GenerateJsonObject();
+
+        /// <summary>
+        /// Withes the parallel actions.
+        /// </summary>
+        /// <param name="actions">The actions.</param>
+        /// <returns></returns>
+        public ILogicAppAction WithParallelActions(params ILogicAppAction[] actions) => this.AddParallelActions(actions);
+
+        /// <summary>
+        /// Thens the action.
+        /// </summary>
+        /// <param name="newAction">The action.</param>
+        /// <returns></returns>
+        public ILogicAppAction ThenAction(ILogicAppAction newAction) => this.AddFollowOnAction(newAction);
+
+        JObject ICanHaveActionsInternal.GetJsonForActions()
         {
             var token = new JObject
             {
                 new JProperty(this.Name,
-                new JObject(
-                    new JProperty("inputs",
-                        new JObject(
-                            this.Inputs.Select(i => new JProperty(i.name, i.value))
-                        )
-                    ),
-                    new JProperty("runAfter", new JObject()),
-                    new JProperty("type", this.Type)
+                    new JObject(
+                        new JProperty("inputs",
+                            new JObject(
+                                this.Inputs.Select(i => new JProperty(i.Key, i.Value))
+                            )
+                        ),
+                        new JProperty("runAfter", new JObject()),
+                        new JProperty("type", this.Type)
+                    )
                 )
-            )};
+            };
 
 
             var content = token[this.Name];
@@ -89,7 +115,10 @@ namespace LogicAppCreator.Actions
 
             try
             {
-                token.Add(((ICanHaveActionsInternal)this).GetJsonForActions());
+                foreach (var childActionSet in GetJsonForChildActions().SelectMany(i => i.Children()))
+                {
+                    token.Add(childActionSet);
+                }
             }
             catch (ArgumentException argEx)
             {
@@ -108,33 +137,6 @@ namespace LogicAppCreator.Actions
             return token;
         }
 
-        void ICanHaveActionsInternal.AddAction(ILogicAppAction action)
-        {
-            var actionInternal = (ILogicAppActionInternal)action;
-            if (_lastAction == null)
-            {
-                actionInternal.RunAfter.Add(new RunAfter { ActionName = this.Name });
-                _actions.Add(actionInternal);
-            }
-            else
-            {
-                actionInternal.RunAfter.Add(new RunAfter { ActionName = _lastAction.Name });
-                ((ICanHaveActionsInternal)_lastAction).AddAction(actionInternal);
-
-            }
-
-            _lastAction = actionInternal;
-        }
-
-        IEnumerable<JToken> ICanHaveActionsInternal.GetJsonForActions()
-        {
-            foreach (var action in _actions)
-            {
-                var actionjson = action.GenerateJsonObject();
-                ((JProperty)actionjson.First).Value["runAfter"] = new JObject(new JProperty(this.Name, new JArray("Succeeded")));
-
-                yield return actionjson.First;
-            }
-        }
+        private IEnumerable<JObject> GetJsonForChildActions() => this.AsInternalActions().Actions.Select(a => a.AsInternalActions()).Select(a => a.GetJsonForActions());
     }
 }
