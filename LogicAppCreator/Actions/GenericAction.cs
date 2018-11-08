@@ -14,15 +14,6 @@ namespace LogicAppCreator.Actions
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericAction" /> class.
         /// </summary>
-        /// <param name="parentTrigger">The parent trigger.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="type">The type.</param>
-        /// <param name="runAfter">The run after.</param>
-        protected GenericAction(ILogicAppTrigger parentTrigger, string name, string type, RunAfter runAfter = null) : this(name, type, runAfter) => this.Trigger = parentTrigger;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GenericAction" /> class.
-        /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="type">The type.</param>
         /// <param name="runAfter">The run after.</param>

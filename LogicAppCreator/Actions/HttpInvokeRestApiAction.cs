@@ -10,10 +10,10 @@ namespace LogicAppCreator.Actions
     /// 
     /// </summary>
     /// <seealso cref="LogicAppCreator.Interfaces.Internal.ILogicAppActionInternal" />
-    public class HttpAction : GenericAction
+    public class HttpInvokeRestApiAction : GenericAction
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpAction" /> class.
+        /// Initializes a new instance of the <see cref="HttpInvokeRestApiAction" /> class.
         /// </summary>
         /// <param name="method">The method.</param>
         /// <param name="url">The URL.</param>
@@ -21,10 +21,10 @@ namespace LogicAppCreator.Actions
         /// <param name="headers">The headers.</param>
         /// <param name="queryParameters">The query parameters.</param>
         /// <param name="actionName">Name of the action.</param>
-        public HttpAction(HttpMethod method, Uri url, JObject body, IEnumerable<(string, string)> headers = null, IEnumerable<(string, string)> queryParameters = null, string actionName = @"HTTP") : this(method, url.OriginalString, body, headers, queryParameters, actionName) { }
+        public HttpInvokeRestApiAction(HttpMethod method, Uri url, JObject body, IEnumerable<(string, string)> headers = null, IEnumerable<(string, string)> queryParameters = null, string actionName = @"HTTP") : this(method, url.OriginalString, body, headers, queryParameters, actionName) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpAction" /> class.
+        /// Initializes a new instance of the <see cref="HttpInvokeRestApiAction" /> class.
         /// </summary>
         /// <param name="method">The method.</param>
         /// <param name="url">The URL.</param>
@@ -32,7 +32,7 @@ namespace LogicAppCreator.Actions
         /// <param name="headers">The headers.</param>
         /// <param name="queryParameters">The query parameters.</param>
         /// <param name="actionName">Name of the action.</param>
-        public HttpAction(HttpMethod method, string url, JObject body, IEnumerable<(string, string)> headers = null, IEnumerable<(string, string)> queryParameters = null, string actionName = @"HTTP") : this(method, new Uri(url), headers, queryParameters, actionName)
+        public HttpInvokeRestApiAction(HttpMethod method, string url, JObject body, IEnumerable<(string, string)> headers = null, IEnumerable<(string, string)> queryParameters = null, string actionName = @"HTTP") : this(method, new Uri(url), headers, queryParameters, actionName)
         {
             if (body != null)
             {
@@ -41,7 +41,7 @@ namespace LogicAppCreator.Actions
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpAction" /> class.
+        /// Initializes a new instance of the <see cref="HttpInvokeRestApiAction" /> class.
         /// </summary>
         /// <param name="method">The method.</param>
         /// <param name="url">The URL.</param>
@@ -49,10 +49,10 @@ namespace LogicAppCreator.Actions
         /// <param name="headers">The headers.</param>
         /// <param name="queryParameters">The query parameters.</param>
         /// <param name="actionName">Name of the action.</param>
-        public HttpAction(HttpMethod method, string url, string body = null, IEnumerable<(string, string)> headers = null, IEnumerable<(string, string)> queryParameters = null, string actionName = @"HTTP") : this(method, new Uri(url), body, headers, queryParameters, actionName) { }
+        public HttpInvokeRestApiAction(HttpMethod method, string url, string body = null, IEnumerable<(string, string)> headers = null, IEnumerable<(string, string)> queryParameters = null, string actionName = @"HTTP") : this(method, new Uri(url), body, headers, queryParameters, actionName) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpAction" /> class.
+        /// Initializes a new instance of the <see cref="HttpInvokeRestApiAction" /> class.
         /// </summary>
         /// <param name="method">The method.</param>
         /// <param name="url">The URL.</param>
@@ -60,7 +60,7 @@ namespace LogicAppCreator.Actions
         /// <param name="headers">The headers.</param>
         /// <param name="queryParameters">The query parameters.</param>
         /// <param name="actionName">Name of the action.</param>
-        public HttpAction(HttpMethod method, Uri url, string body = null, IEnumerable<(string, string)> headers = null, IEnumerable<(string, string)> queryParameters = null, string actionName = @"HTTP") : this(method, url, headers, queryParameters, actionName)
+        public HttpInvokeRestApiAction(HttpMethod method, Uri url, string body = null, IEnumerable<(string, string)> headers = null, IEnumerable<(string, string)> queryParameters = null, string actionName = @"HTTP") : this(method, url, headers, queryParameters, actionName)
         {
             if (!string.IsNullOrWhiteSpace(body))
             {
@@ -69,14 +69,14 @@ namespace LogicAppCreator.Actions
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpAction" /> class.
+        /// Initializes a new instance of the <see cref="HttpInvokeRestApiAction" /> class.
         /// </summary>
         /// <param name="method">The method.</param>
         /// <param name="url">The URL.</param>
         /// <param name="headers">The headers.</param>
         /// <param name="queryParameters">The query parameters.</param>
         /// <param name="actionName">Name of the action.</param>
-        public HttpAction(HttpMethod method, Uri url, IEnumerable<(string, string)> headers = null, IEnumerable<(string, string)> queryParameters = null, string actionName = @"HTTP") : base(actionName, @"Http")
+        public HttpInvokeRestApiAction(HttpMethod method, Uri url, IEnumerable<(string, string)> headers = null, IEnumerable<(string, string)> queryParameters = null, string actionName = @"HTTP") : base(actionName, @"Http")
         {
             this.Inputs.Add(@"method", method.ToString());
             this.Inputs.Add(@"uri", url.OriginalString);

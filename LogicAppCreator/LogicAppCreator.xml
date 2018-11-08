@@ -69,15 +69,6 @@
             <summary></summary>
             <seealso cref="T:LogicAppCreator.Interfaces.Internal.ILogicAppActionInternal" />
         </member>
-        <member name="M:LogicAppCreator.Actions.GenericAction.#ctor(LogicAppCreator.Interfaces.ILogicAppTrigger,System.String,System.String,LogicAppCreator.RunAfter)">
-            <summary>
-            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.GenericAction" /> class.
-            </summary>
-            <param name="parentTrigger">The parent trigger.</param>
-            <param name="name">The name.</param>
-            <param name="type">The type.</param>
-            <param name="runAfter">The run after.</param>
-        </member>
         <member name="M:LogicAppCreator.Actions.GenericAction.#ctor(System.String,System.String,LogicAppCreator.RunAfter)">
             <summary>
             Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.GenericAction" /> class.
@@ -132,15 +123,15 @@
             <param name="newAction">The action.</param>
             <returns></returns>
         </member>
-        <member name="T:LogicAppCreator.Actions.HttpAction">
+        <member name="T:LogicAppCreator.Actions.HttpInvokeRestApiAction">
             <summary>
             
             </summary>
             <seealso cref="T:LogicAppCreator.Interfaces.Internal.ILogicAppActionInternal" />
         </member>
-        <member name="M:LogicAppCreator.Actions.HttpAction.#ctor(System.Net.Http.HttpMethod,System.Uri,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.String)">
+        <member name="M:LogicAppCreator.Actions.HttpInvokeRestApiAction.#ctor(System.Net.Http.HttpMethod,System.Uri,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.HttpAction" /> class.
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.HttpInvokeRestApiAction" /> class.
             </summary>
             <param name="method">The method.</param>
             <param name="url">The URL.</param>
@@ -149,9 +140,9 @@
             <param name="queryParameters">The query parameters.</param>
             <param name="actionName">Name of the action.</param>
         </member>
-        <member name="M:LogicAppCreator.Actions.HttpAction.#ctor(System.Net.Http.HttpMethod,System.String,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.String)">
+        <member name="M:LogicAppCreator.Actions.HttpInvokeRestApiAction.#ctor(System.Net.Http.HttpMethod,System.String,Newtonsoft.Json.Linq.JObject,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.HttpAction" /> class.
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.HttpInvokeRestApiAction" /> class.
             </summary>
             <param name="method">The method.</param>
             <param name="url">The URL.</param>
@@ -160,9 +151,9 @@
             <param name="queryParameters">The query parameters.</param>
             <param name="actionName">Name of the action.</param>
         </member>
-        <member name="M:LogicAppCreator.Actions.HttpAction.#ctor(System.Net.Http.HttpMethod,System.String,System.String,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.String)">
+        <member name="M:LogicAppCreator.Actions.HttpInvokeRestApiAction.#ctor(System.Net.Http.HttpMethod,System.String,System.String,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.HttpAction" /> class.
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.HttpInvokeRestApiAction" /> class.
             </summary>
             <param name="method">The method.</param>
             <param name="url">The URL.</param>
@@ -171,9 +162,9 @@
             <param name="queryParameters">The query parameters.</param>
             <param name="actionName">Name of the action.</param>
         </member>
-        <member name="M:LogicAppCreator.Actions.HttpAction.#ctor(System.Net.Http.HttpMethod,System.Uri,System.String,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.String)">
+        <member name="M:LogicAppCreator.Actions.HttpInvokeRestApiAction.#ctor(System.Net.Http.HttpMethod,System.Uri,System.String,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.HttpAction" /> class.
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.HttpInvokeRestApiAction" /> class.
             </summary>
             <param name="method">The method.</param>
             <param name="url">The URL.</param>
@@ -182,15 +173,44 @@
             <param name="queryParameters">The query parameters.</param>
             <param name="actionName">Name of the action.</param>
         </member>
-        <member name="M:LogicAppCreator.Actions.HttpAction.#ctor(System.Net.Http.HttpMethod,System.Uri,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.String)">
+        <member name="M:LogicAppCreator.Actions.HttpInvokeRestApiAction.#ctor(System.Net.Http.HttpMethod,System.Uri,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}},System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.HttpAction" /> class.
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.HttpInvokeRestApiAction" /> class.
             </summary>
             <param name="method">The method.</param>
             <param name="url">The URL.</param>
             <param name="headers">The headers.</param>
             <param name="queryParameters">The query parameters.</param>
             <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="T:LogicAppCreator.Actions.HttpWebhookAction">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:LogicAppCreator.Actions.GenericAction" />
+        </member>
+        <member name="M:LogicAppCreator.Actions.HttpWebhookAction.#ctor(System.Net.Http.HttpMethod,System.Uri,System.String,System.String,LogicAppCreator.RunAfter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.HttpWebhookAction" /> class.
+            </summary>
+            <param name="subscribeMethod">The subscribe method.</param>
+            <param name="subscribeUri">The subscribe URI.</param>
+            <param name="subscribeBody">The subscribe body.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="runAfter">The run after.</param>
+        </member>
+        <member name="M:LogicAppCreator.Actions.HttpWebhookAction.#ctor(System.Net.Http.HttpMethod,System.Uri,System.Net.Http.HttpMethod,System.Uri,System.String,System.String,System.String,LogicAppCreator.RunAfter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Actions.HttpWebhookAction" /> class.
+            </summary>
+            <param name="subscribeMethod">The subscribe method.</param>
+            <param name="subscribeUri">The subscribe URI.</param>
+            <param name="unsubscribeMethod">The unsubscribe method.</param>
+            <param name="unsubscribeUri">The unsubscribe URI.</param>
+            <param name="subscribeBody">The subscribe body.</param>
+            <param name="unsubscribeBody">The unsubscribe body.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="runAfter">The run after.</param>
         </member>
         <member name="T:LogicAppCreator.Interfaces.ICanHaveActions">
             <summary></summary>

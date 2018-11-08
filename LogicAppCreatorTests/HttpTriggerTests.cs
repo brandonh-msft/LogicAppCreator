@@ -43,7 +43,7 @@ namespace LogicAppCreatorTests
         {
             var la = new LogicApp()
                 .WithTrigger(new HttpTrigger(HttpMethod.Post))
-                .ThenAction(new HttpAction(HttpMethod.Get, @"http://google.com"));
+                .ThenAction(new HttpInvokeRestApiAction(HttpMethod.Get, @"http://google.com"));
 
             CompareLogicAppToActual(la, @"{
     ""definition"": {
@@ -81,8 +81,8 @@ namespace LogicAppCreatorTests
         {
             var la = new LogicApp()
                 .WithTrigger(new HttpTrigger(HttpMethod.Post))
-                .ThenAction(new HttpAction(HttpMethod.Get, @"http://google.com"))
-                .ThenAction(new HttpAction(HttpMethod.Post, @"https://bing.com"));
+                .ThenAction(new HttpInvokeRestApiAction(HttpMethod.Get, @"http://google.com"))
+                .ThenAction(new HttpInvokeRestApiAction(HttpMethod.Post, @"https://bing.com"));
 
             la.GenerateJson();
         }
@@ -92,8 +92,8 @@ namespace LogicAppCreatorTests
         {
             var la = new LogicApp()
                 .WithTrigger(new HttpTrigger(HttpMethod.Post))
-                .ThenAction(new HttpAction(HttpMethod.Get, @"http://google.com"))
-                .ThenAction(new HttpAction(HttpMethod.Post, @"https://bing.com", actionName: "HTTP2"));
+                .ThenAction(new HttpInvokeRestApiAction(HttpMethod.Get, @"http://google.com"))
+                .ThenAction(new HttpInvokeRestApiAction(HttpMethod.Post, @"https://bing.com", actionName: "HTTP2"));
 
             CompareLogicAppToActual(la, @"{
     ""definition"": {
@@ -143,7 +143,7 @@ namespace LogicAppCreatorTests
         {
             var la = new LogicApp()
                 .WithTrigger(new HttpTrigger(HttpMethod.Post))
-                .ThenAction(new HttpAction(HttpMethod.Get, @"http://google.com", "foo"));
+                .ThenAction(new HttpInvokeRestApiAction(HttpMethod.Get, @"http://google.com", "foo"));
 
             CompareLogicAppToActual(la, @"{
     ""definition"": {
@@ -181,7 +181,7 @@ namespace LogicAppCreatorTests
         {
             var la = new LogicApp()
                 .WithTrigger(new HttpTrigger(HttpMethod.Post))
-                .ThenAction(new HttpAction(HttpMethod.Get, @"http://google.com", new JObject(new JProperty("foo", "bar"))));
+                .ThenAction(new HttpInvokeRestApiAction(HttpMethod.Get, @"http://google.com", new JObject(new JProperty("foo", "bar"))));
 
             CompareLogicAppToActual(la, @"{
     ""definition"": {
@@ -221,7 +221,7 @@ namespace LogicAppCreatorTests
         {
             var la = new LogicApp()
                 .WithTrigger(new HttpTrigger(HttpMethod.Post))
-                .ThenAction(new HttpAction(HttpMethod.Get, @"http://google.com",
+                .ThenAction(new HttpInvokeRestApiAction(HttpMethod.Get, @"http://google.com",
                     headers: new[] { ("foo", "bar"), ("jam", "box") }));
 
             CompareLogicAppToActual(la, @"{
@@ -263,7 +263,7 @@ namespace LogicAppCreatorTests
         {
             var la = new LogicApp()
                 .WithTrigger(new HttpTrigger(HttpMethod.Post))
-                .ThenAction(new HttpAction(HttpMethod.Get, @"http://google.com",
+                .ThenAction(new HttpInvokeRestApiAction(HttpMethod.Get, @"http://google.com",
                     queryParameters: new[] { ("foo", "bar"), ("jam", "box") }));
 
             CompareLogicAppToActual(la, @"{
@@ -306,9 +306,9 @@ namespace LogicAppCreatorTests
             var la = new LogicApp()
                 .WithTrigger(new HttpTrigger(HttpMethod.Get))
                 .WithParallelActions(
-                     new HttpAction(HttpMethod.Get, @"https://bing.com"),
-                     new HttpAction(HttpMethod.Post, @"https://google.com", actionName: @"HTTP_2"))
-                .ThenAction(new HttpAction(HttpMethod.Put, @"https://azure.com", actionName: @"HTTP_3"));
+                     new HttpInvokeRestApiAction(HttpMethod.Get, @"https://bing.com"),
+                     new HttpInvokeRestApiAction(HttpMethod.Post, @"https://google.com", actionName: @"HTTP_2"))
+                .ThenAction(new HttpInvokeRestApiAction(HttpMethod.Put, @"https://azure.com", actionName: @"HTTP_3"));
 
             CompareLogicAppToActual(la, @"{
     ""definition"": {
@@ -369,11 +369,11 @@ namespace LogicAppCreatorTests
             var la = new LogicApp()
                 .WithTrigger(new HttpTrigger(HttpMethod.Post))
                 .WithParallelActions(
-                    new HttpAction(HttpMethod.Get, @"https://bing.com"),
-                    new HttpAction(HttpMethod.Post, @"https://google.com", actionName: @"HTTP_2"))
+                    new HttpInvokeRestApiAction(HttpMethod.Get, @"https://bing.com"),
+                    new HttpInvokeRestApiAction(HttpMethod.Post, @"https://google.com", actionName: @"HTTP_2"))
                 .WithParallelActions(
-                    new HttpAction(HttpMethod.Put, @"https://azure.com", actionName: @"HTTP_3"),
-                    new HttpAction(HttpMethod.Delete, @"https://amazon.com", actionName: @"HTTP_4"));
+                    new HttpInvokeRestApiAction(HttpMethod.Put, @"https://azure.com", actionName: @"HTTP_3"),
+                    new HttpInvokeRestApiAction(HttpMethod.Delete, @"https://amazon.com", actionName: @"HTTP_4"));
 
             this.TestContext.WriteLine(la.GenerateJson());
         }
@@ -384,12 +384,12 @@ namespace LogicAppCreatorTests
             var la = new LogicApp()
                 .WithTrigger(new HttpTrigger(HttpMethod.Post))
                 .WithParallelActions(
-                    new HttpAction(HttpMethod.Get, @"https://bing.com"),
-                    new HttpAction(HttpMethod.Post, @"https://google.com", actionName: @"HTTP_2"))
-                .ThenAction(new HttpAction(HttpMethod.Get, @"http://foo.bar", actionName: @"HTTP_5"))
+                    new HttpInvokeRestApiAction(HttpMethod.Get, @"https://bing.com"),
+                    new HttpInvokeRestApiAction(HttpMethod.Post, @"https://google.com", actionName: @"HTTP_2"))
+                .ThenAction(new HttpInvokeRestApiAction(HttpMethod.Get, @"http://foo.bar", actionName: @"HTTP_5"))
                 .WithParallelActions(
-                    new HttpAction(HttpMethod.Put, @"https://azure.com", actionName: @"HTTP_3"),
-                    new HttpAction(HttpMethod.Delete, @"https://amazon.com", actionName: @"HTTP_4"));
+                    new HttpInvokeRestApiAction(HttpMethod.Put, @"https://azure.com", actionName: @"HTTP_3"),
+                    new HttpInvokeRestApiAction(HttpMethod.Delete, @"https://amazon.com", actionName: @"HTTP_4"));
 
             CompareLogicAppToActual(la, @"{
     ""definition"": {
@@ -466,6 +466,51 @@ namespace LogicAppCreatorTests
         }
     }
 }");
+        }
+
+        [TestMethod]
+        public void SingleHttpWebhookAction()
+        {
+            var la = new LogicApp()
+                .WithTrigger(new HttpTrigger(HttpMethod.Get))
+                .ThenAction(new HttpWebhookAction(HttpMethod.Get, new Uri(@"https://bing.com"), HttpMethod.Post, new Uri(@"https://google.com"), @"bingbody", @"googlebody"));
+
+            CompareLogicAppToActual(la, @"{
+    ""definition"": {
+        ""$schema"": ""https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#"",
+        ""actions"": {
+                ""HTTP_Webhook"": {
+                    ""inputs"": {
+                        ""subscribe"": {
+                            ""body"": ""bingbody"",
+                        ""method"": ""GET"",
+                        ""uri"": ""https://bing.com""
+                        },
+                    ""unsubscribe"": {
+                            ""body"": ""googlebody"",
+                        ""method"": ""POST"",
+                        ""uri"": ""https://google.com""
+                    }
+                    },
+                ""runAfter"": { },
+                ""type"": ""HttpWebhook""
+                }
+            },
+        ""contentVersion"": ""1.0.0.0"",
+        ""outputs"": { },
+        ""parameters"": { },
+        ""triggers"": {
+                ""manual"": {
+                    ""inputs"": {
+                        ""method"": ""GET"",
+                    ""schema"": { }
+                    },
+                ""kind"": ""Http"",
+                ""type"": ""Request""
+                }
+            }
+        }
+    }");
         }
     }
 }
