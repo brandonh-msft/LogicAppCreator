@@ -57,6 +57,14 @@ namespace LogicAppCreator.Triggers
         public string Type { get; private set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether [uses connections].
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if [uses connections]; otherwise, <c>false</c>.
+        /// </value>
+        bool ILogicAppTriggerInternal.UsesConnections { get; set; } = false;
+
+        /// <summary>
         /// Gets the actions.
         /// </summary>
         IList<ILogicAppAction> ICanHaveActions.Actions { get; } = new List<ILogicAppAction>();
@@ -65,19 +73,39 @@ namespace LogicAppCreator.Triggers
         /// Generates the json object.
         /// </summary>
         /// <returns></returns>
-        public JToken GenerateJsonObject()
+        public virtual JToken GenerateJsonObject()
         {
             var jsonObj = JToken.Parse(LA_SCAFFOLDING);
+            var jsonObjDef = jsonObj[@"definition"];
+
+            if (this.AsInternalTrigger().UsesConnections)
+            {
+                jsonObjDef
+                    .Parent.AddBeforeSelf(new JProperty(@"$connections",
+                        new JObject(
+                        new JProperty(@"value", new JObject())
+                        )
+                    ));
+
+                // TODO: loop thru and add the connection information
+
+                jsonObjDef
+                    [@"parameters"] =
+                        new JObject(
+                        new JProperty(@"$connections",
+                            new JObject(
+                            new JProperty(@"defaultValue", new JObject()),
+                            new JProperty(@"type", @"Object"))
+                        ));
+            }
 
             var actionsJobject = ((ICanHaveActionsInternal)this).GetJsonForActions();
 
-            jsonObj
-                [@"definition"]
-                    [@"actions"] = actionsJobject ?? new JObject();
+            jsonObjDef
+                [@"actions"] = actionsJobject ?? new JObject();
 
-            jsonObj
-                [@"definition"]
-                    [@"triggers"] = GenerateJsonObjectImpl();
+            jsonObjDef
+                [@"triggers"] = GenerateJsonObjectImpl();
 
 
             return jsonObj;
@@ -85,7 +113,7 @@ namespace LogicAppCreator.Triggers
 
         private JToken GenerateJsonObjectImpl()
         {
-            return new JObject
+            var retVal = new JObject
             {
                 new JProperty(this.Name,
                 new JObject(
@@ -94,10 +122,16 @@ namespace LogicAppCreator.Triggers
                             this.Inputs.Select(i => new JProperty(i.Key, i.Value))
                         )
                     ),
-                    new JProperty("kind", this.Kind),
                     new JProperty("type", this.Type)
                 )
             )};
+
+            if (!string.IsNullOrWhiteSpace(this.Kind))
+            {
+                retVal[this.Name][@"type"].AddBeforeSelf(new JProperty(@"kind", this.Kind));
+            }
+
+            return retVal;
         }
 
         JObject ICanHaveActionsInternal.GetJsonForActions()

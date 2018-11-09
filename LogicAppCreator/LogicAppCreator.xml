@@ -330,6 +330,14 @@
             Gets or sets the parent logic application.
             </summary>
         </member>
+        <member name="P:LogicAppCreator.Interfaces.Internal.ILogicAppTriggerInternal.UsesConnections">
+            <summary>
+            Gets or sets a value indicating whether [uses connections].
+            </summary>
+            <value>
+              <c>true</c> if [uses connections]; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="T:LogicAppCreator.GenerateJsonExtensions">
             <summary></summary>
         </member>
@@ -349,6 +357,41 @@
             </summary>
             <param name="trigger">The trigger.</param>
             <returns></returns>
+        </member>
+        <member name="T:LogicAppCreator.RecurrenceOptions.General">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.RecurrenceOptions.General.Second">
+            <summary>
+            The second
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.RecurrenceOptions.General.Minute">
+            <summary>
+            The minute
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.RecurrenceOptions.General.Hour">
+            <summary>
+            The hour
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.RecurrenceOptions.General.Day">
+            <summary>
+            The day
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.RecurrenceOptions.General.Week">
+            <summary>
+            The week
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.RecurrenceOptions.General.Month">
+            <summary>
+            The month
+            </summary>
         </member>
         <member name="T:LogicAppCreator.RunAfter">
             <summary>
@@ -411,6 +454,14 @@
             Gets the type.
             </summary>
         </member>
+        <member name="P:LogicAppCreator.Triggers.BaseTrigger.LogicAppCreator#Interfaces#Internal#ILogicAppTriggerInternal#UsesConnections">
+            <summary>
+            Gets or sets a value indicating whether [uses connections].
+            </summary>
+            <value>
+            <c>true</c> if [uses connections]; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="P:LogicAppCreator.Triggers.BaseTrigger.LogicAppCreator#Interfaces#ICanHaveActions#Actions">
             <summary>
             Gets the actions.
@@ -434,6 +485,28 @@
             Thens the action.
             </summary>
             <param name="newAction">The new action.</param>
+            <returns></returns>
+        </member>
+        <member name="T:LogicAppCreator.Triggers.FtpTriggerWhenFileIsAddedOrModified">
+            <summary></summary>
+            <seealso cref="T:LogicAppCreator.Triggers.BaseTrigger" />
+        </member>
+        <member name="M:LogicAppCreator.Triggers.FtpTriggerWhenFileIsAddedOrModified.#ctor(System.String,System.String,System.UInt32,LogicAppCreator.RecurrenceOptions.General,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Triggers.FtpTriggerWhenFileIsAddedOrModified" /> class.
+            </summary>
+            <param name="connectionName">Name of the connection.</param>
+            <param name="folderId">The folder identifier.</param>
+            <param name="interval">The interval.</param>
+            <param name="frequency">The frequency.</param>
+            <param name="includeFileContent">if set to <c>true</c> [include file content].</param>
+            <param name="inferContentType">if set to <c>true</c> [infer content type].</param>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:LogicAppCreator.Triggers.FtpTriggerWhenFileIsAddedOrModified.GenerateJsonObject">
+            <summary>
+            Generates the json object.
+            </summary>
             <returns></returns>
         </member>
         <member name="T:LogicAppCreator.Triggers.HttpTrigger">
