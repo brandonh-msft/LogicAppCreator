@@ -80,14 +80,14 @@ namespace LogicAppCreator.Triggers
 
             if (this.AsInternalTrigger().UsesConnections)
             {
+                var connectionsObj = this.AsInternalTrigger().ParentLogicApp.GetConnectionsJObject();
+
                 jsonObjDef
                     .Parent.AddBeforeSelf(new JProperty(@"$connections",
                         new JObject(
-                        new JProperty(@"value", new JObject())
+                        new JProperty(@"value", connectionsObj)
                         )
                     ));
-
-                // TODO: loop thru and add the connection information
 
                 jsonObjDef
                     [@"parameters"] =

@@ -212,6 +212,258 @@
             <param name="actionName">Name of the action.</param>
             <param name="runAfter">The run after.</param>
         </member>
+        <member name="T:LogicAppCreator.AzureRegion">
+            <summary></summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.EastAsia">
+            <summary>
+            east asia
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.SoutheastAsia">
+            <summary>
+            southeast asia
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.CentralUs">
+            <summary>
+            central us
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.EastUs">
+            <summary>
+            east us
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.EastUs2">
+            <summary>
+            east us2
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.WestUs">
+            <summary>
+            west us
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.NorthCentralUs">
+            <summary>
+            north central us
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.SouthCentralUs">
+            <summary>
+            south central us
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.NorthEurope">
+            <summary>
+            north europe
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.WestEurope">
+            <summary>
+            west europe
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.JapanWest">
+            <summary>
+            japan west
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.JapanEast">
+            <summary>
+            japan east
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.BrazilSouth">
+            <summary>
+            brazil south
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.AustraliaEast">
+            <summary>
+            australia east
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.AustraliaSoutheast">
+            <summary>
+            australia southeast
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.SouthIndia">
+            <summary>
+            south india
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.CentralIndia">
+            <summary>
+            central india
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.WestIndia">
+            <summary>
+            west india
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.CanadaCentral">
+            <summary>
+            canada central
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.CanadaEast">
+            <summary>
+            canada east
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.UkSouth">
+            <summary>
+            uk south
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.UkWest">
+            <summary>
+            uk west
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.WestCentralUs">
+            <summary>
+            west central us
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.WestUs2">
+            <summary>
+            west us2
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.KoreaCentral">
+            <summary>
+            korea central
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.KoreaSouth">
+            <summary>
+            korea south
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.FranceCentral">
+            <summary>
+            france central
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.FranceSouth">
+            <summary>
+            france south
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.AustraliaCentral">
+            <summary>
+            australia central
+            </summary>
+        </member>
+        <member name="F:LogicAppCreator.AzureRegion.AustraliaCentral2">
+            <summary>
+            australia central2
+            </summary>
+        </member>
+        <member name="T:LogicAppCreator.Connectors.BaseConnector">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:LogicAppCreator.Interfaces.IGenerateJson" />
+        </member>
+        <member name="P:LogicAppCreator.Connectors.BaseConnector.Type">
+            <summary>
+            Gets the type.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Connectors.BaseConnector.ProviderName">
+            <summary>
+            Gets the name of the provider.
+            </summary>
+            <value>
+            The name of the provider.
+            </value>
+        </member>
+        <member name="P:LogicAppCreator.Connectors.BaseConnector.Name">
+            <summary>
+            Gets the name.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Connectors.BaseConnector.AzureRegion">
+            <summary>
+            Gets the azure region.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Connectors.BaseConnector.SubscriptionId">
+            <summary>
+            Gets the subscription identifier.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Connectors.BaseConnector.ResourceGroupName">
+            <summary>
+            Gets the name of the resource group.
+            </summary>
+            <value>
+            The name of the resource group.
+            </value>
+        </member>
+        <member name="M:LogicAppCreator.Connectors.BaseConnector.GenerateJsonObject">
+            <summary>
+            Generates the json object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:LogicAppCreator.Connectors.FtpConnector">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:LogicAppCreator.Connectors.BaseConnector" />
+        </member>
+        <member name="P:LogicAppCreator.Connectors.FtpConnector.AzureRegion">
+            <summary>
+            Gets the azure region.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Connectors.FtpConnector.Name">
+            <summary>
+            Gets the name.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Connectors.FtpConnector.ProviderName">
+            <summary>
+            Gets the name of the provider.
+            </summary>
+            <value>
+            The name of the provider.
+            </value>
+        </member>
+        <member name="P:LogicAppCreator.Connectors.FtpConnector.ResourceGroupName">
+            <summary>
+            Gets the name of the resource group.
+            </summary>
+            <value>
+            The name of the resource group.
+            </value>
+        </member>
+        <member name="P:LogicAppCreator.Connectors.FtpConnector.SubscriptionId">
+            <summary>
+            Gets the subscription identifier.
+            </summary>
+        </member>
+        <member name="P:LogicAppCreator.Connectors.FtpConnector.Type">
+            <summary>
+            Gets the type.
+            </summary>
+        </member>
+        <member name="M:LogicAppCreator.Connectors.FtpConnector.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LogicAppCreator.Connectors.FtpConnector"/> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="subscriptionId">The subscription identifier.</param>
+            <param name="azureRegion">The azure region.</param>
+            <param name="resourceGroupName">Name of the resource group.</param>
+        </member>
         <member name="T:LogicAppCreator.Interfaces.ICanHaveActions">
             <summary></summary>
         </member>
@@ -350,6 +602,13 @@
         </member>
         <member name="T:LogicAppCreator.LogicApp">
             <summary></summary>
+        </member>
+        <member name="M:LogicAppCreator.LogicApp.UsingConnector(LogicAppCreator.Connectors.BaseConnector)">
+            <summary>
+            Usings the connector.
+            </summary>
+            <param name="connector">The connector.</param>
+            <returns></returns>
         </member>
         <member name="M:LogicAppCreator.LogicApp.WithTrigger(LogicAppCreator.Interfaces.ILogicAppTrigger)">
             <summary>
