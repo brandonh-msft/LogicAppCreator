@@ -1,4 +1,5 @@
-﻿using LogicAppCreator;
+﻿using System;
+using LogicAppCreator;
 using LogicAppCreator.Connectors;
 using LogicAppCreator.Triggers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -64,5 +65,9 @@ namespace LogicAppCreatorTests
 }");
             this.TestContext.WriteLine(la.GenerateJson());
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), @"Should've gotten an ArgumentException thrown since the Logic App didn't have a connection with the name input to the Trigger")]
+        public void TriggerUsesNonexistentConnection() => new LogicApp().WithTrigger(new FtpTriggerWhenFileIsAddedOrModified(@"ftp1", "foo", 3, LogicAppCreator.RecurrenceOptions.General.Minute)).GenerateJson();
     }
 }

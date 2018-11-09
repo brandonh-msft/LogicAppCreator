@@ -13,7 +13,7 @@
         /// <summary>
         /// Gets the name.
         /// </summary>
-        protected override string Name { get; set; }
+        protected internal override string Name { get; set; }
         /// <summary>
         /// Gets the name of the provider.
         /// </summary>

@@ -25,7 +25,7 @@ namespace LogicAppCreator.Connectors
         /// <summary>
         /// Gets the name.
         /// </summary>
-        protected abstract string Name { get; set; }
+        protected internal abstract string Name { get; set; }
 
         /// <summary>
         /// Gets the azure region.

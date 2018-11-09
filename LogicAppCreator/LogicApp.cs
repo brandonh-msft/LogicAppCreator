@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using LogicAppCreator.Connectors;
 using LogicAppCreator.Interfaces;
 using Newtonsoft.Json.Linq;
@@ -9,6 +11,7 @@ namespace LogicAppCreator
     public sealed class LogicApp
     {
         private readonly IList<BaseConnector> _connectors = new List<BaseConnector>();
+        internal bool HasConnectionNamed(string connectionName, StringComparison comparisonType = StringComparison.OrdinalIgnoreCase) => _connectors.Any(c => c.Name.Equals(connectionName, comparisonType));
 
         /// <summary>
         /// Usings the connector.

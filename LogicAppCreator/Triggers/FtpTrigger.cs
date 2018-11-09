@@ -1,4 +1,5 @@
-﻿using LogicAppCreator.Interfaces;
+﻿using System;
+using LogicAppCreator.Interfaces;
 using LogicAppCreator.RecurrenceOptions;
 using Newtonsoft.Json.Linq;
 
@@ -58,6 +59,11 @@ namespace LogicAppCreator.Triggers
         /// <returns></returns>
         public override JToken GenerateJsonObject()
         {
+            if (!this.AsInternalTrigger().ParentLogicApp.HasConnectionNamed(_connectionName))
+            {
+                throw new ArgumentException($@"No connection with name '{_connectionName}' has been added to the parent logic app for {GetType().Name} '{this.Name}'. Call 'LogicApp.UsingConnector()' and give a connector with the name '{_connectionName}' before adding this trigger to the LogicApp.");
+            }
+
             var baseObj = base.GenerateJsonObject();
 
             baseObj

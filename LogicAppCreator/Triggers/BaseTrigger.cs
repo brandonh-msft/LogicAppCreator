@@ -128,7 +128,7 @@ namespace LogicAppCreator.Triggers
 
             if (!string.IsNullOrWhiteSpace(this.Kind))
             {
-                retVal[this.Name][@"type"].AddBeforeSelf(new JProperty(@"kind", this.Kind));
+                retVal[this.Name][@"type"].Parent.AddBeforeSelf(new JProperty(@"kind", this.Kind));
             }
 
             return retVal;
