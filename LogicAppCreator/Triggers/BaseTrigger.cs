@@ -134,17 +134,10 @@ namespace LogicAppCreator.Triggers
             return retVal;
         }
 
-        JObject ICanHaveActionsInternal.GetJsonForActions()
-        {
-            var allActions = new JObject();
-
-            foreach (var action in this.AsInternalActions().Actions.Select(a => a.AsInternalActions().GetJsonForActions()).SelectMany(j => j.Children()))
-            {
-                allActions.Add(action);
-            }
-
-            return allActions;
-        }
+        JObject ICanHaveActionsInternal.GetJsonForActions() => new JObject(
+                this.AsInternalActions().Actions.Select(
+                    a => a.AsInternalActions().GetJsonForActions())
+                    .SelectMany(j => j.Children()));
 
         /// <summary>
         /// Withes the parallel actions.
