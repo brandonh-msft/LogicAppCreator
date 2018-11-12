@@ -129,5 +129,11 @@ namespace LogicAppCreator.Actions
         }
 
         private IEnumerable<JObject> GetJsonForChildActions() => this.AsInternalActions().Actions.Select(a => a.AsInternalActions()).Select(a => a.GetJsonForActions());
+
+        /// <summary>
+        /// Generates the arm template object.
+        /// </summary>
+        /// <returns></returns>
+        public JToken GenerateArmTemplateObject() => this.AsInternalAction().Trigger.GenerateArmTemplateObject();
     }
 }

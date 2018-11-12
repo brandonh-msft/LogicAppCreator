@@ -12,6 +12,13 @@ namespace LogicAppCreator
         /// <param name="igen">The igen.</param>
         /// <returns></returns>
         public static string GenerateJson(this IGenerateJson igen) => igen.GenerateJsonObject().ToString();
+
+        /// <summary>
+        /// Generates the json.
+        /// </summary>
+        /// <param name="igen">The igen.</param>
+        /// <returns></returns>
+        public static string GenerateArmJson(this IGenerateJson igen) => igen.GenerateArmTemplateObject().ToString();
     }
 
     namespace Interfaces
@@ -24,6 +31,12 @@ namespace LogicAppCreator
             /// </summary>
             /// <returns></returns>
             JToken GenerateJsonObject();
+
+            /// <summary>
+            /// Generates the arm template object.
+            /// </summary>
+            /// <returns></returns>
+            JToken GenerateArmTemplateObject();
         }
     }
 }

@@ -60,5 +60,37 @@ namespace LogicAppCreator.Connectors
                     )
                 );
         }
+
+        private const string ARM_TEMPLATE = @"{
+            ""type"": ""Microsoft.Web/connections"",
+            ""name"": """",
+            ""apiVersion"": ""2016-06-01"",
+            ""location"": """",
+            ""scale"": null,
+            ""properties"": {
+                ""displayName"": """",
+                ""customParameterValues"": {},
+                ""api"": {
+                    ""id"": """"
+                }
+            },
+            ""dependsOn"": []
+    }";
+
+        /// <summary>
+        /// Generates the arm template object.
+        /// </summary>
+        /// <returns></returns>
+        public JToken GenerateArmTemplateObject()
+        {
+            var core = JObject.Parse(ARM_TEMPLATE);
+
+            core[@"name"] = this.Name;
+            core[@"location"] = this.AzureRegion.Name;
+            core[@"properties"][@"displayName"] = this.Name;
+            core[@"properties"][@"api"][@"id"] = $@"/subscriptions/{this.SubscriptionId}/providers/{this.ProviderName}/locations/{this.AzureRegion.Name}/managedApis/{this.Type}";
+
+            return core;
+        }
     }
 }

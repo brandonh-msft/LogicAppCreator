@@ -123,6 +123,12 @@
             <param name="newAction">The action.</param>
             <returns></returns>
         </member>
+        <member name="M:LogicAppCreator.Actions.GenericAction.GenerateArmTemplateObject">
+            <summary>
+            Generates the arm template object.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:LogicAppCreator.Actions.HttpInvokeRestApiAction">
             <summary>
             
@@ -260,6 +266,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:LogicAppCreator.Connectors.BaseConnector.GenerateArmTemplateObject">
+            <summary>
+            Generates the arm template object.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:LogicAppCreator.Connectors.FtpConnector">
             <summary>
             
@@ -335,6 +347,12 @@
         <member name="M:LogicAppCreator.Interfaces.IGenerateJson.GenerateJsonObject">
             <summary>
             Generates the json object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LogicAppCreator.Interfaces.IGenerateJson.GenerateArmTemplateObject">
+            <summary>
+            Generates the arm template object.
             </summary>
             <returns></returns>
         </member>
@@ -447,8 +465,21 @@
             <param name="igen">The igen.</param>
             <returns></returns>
         </member>
+        <member name="M:LogicAppCreator.GenerateJsonExtensions.GenerateArmJson(LogicAppCreator.Interfaces.IGenerateJson)">
+            <summary>
+            Generates the json.
+            </summary>
+            <param name="igen">The igen.</param>
+            <returns></returns>
+        </member>
         <member name="T:LogicAppCreator.LogicApp">
             <summary></summary>
+        </member>
+        <member name="M:LogicAppCreator.LogicApp.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LogicAppCreator.LogicApp" /> class.
+            </summary>
+            <param name="name">The name.</param>
         </member>
         <member name="M:LogicAppCreator.LogicApp.UsingConnector(LogicAppCreator.Connectors.BaseConnector)">
             <summary>
@@ -591,6 +622,12 @@
             Thens the action.
             </summary>
             <param name="newAction">The new action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LogicAppCreator.Triggers.BaseTrigger.GenerateArmTemplateObject">
+            <summary>
+            Generates the arm template object.
+            </summary>
             <returns></returns>
         </member>
         <member name="T:LogicAppCreator.Triggers.FtpTriggerWhenFileIsAddedOrModified">

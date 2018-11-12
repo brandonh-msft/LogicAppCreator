@@ -152,5 +152,11 @@ namespace LogicAppCreator.Triggers
         /// <param name="newAction">The new action.</param>
         /// <returns></returns>
         public ILogicAppAction ThenAction(ILogicAppAction newAction) => this.AddFollowOnAction(newAction);
+
+        /// <summary>
+        /// Generates the arm template object.
+        /// </summary>
+        /// <returns></returns>
+        public JToken GenerateArmTemplateObject() => this.AsInternalTrigger().ParentLogicApp.GetArmTemplateScaffolding();
     }
 }
