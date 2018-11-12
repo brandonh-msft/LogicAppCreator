@@ -30,7 +30,7 @@ namespace LogicAppCreator.Connectors
         /// <summary>
         /// Gets the azure region.
         /// </summary>
-        protected abstract string AzureRegion { get; set; }
+        protected abstract Microsoft.Azure.Management.ResourceManager.Fluent.Core.Region AzureRegion { get; set; }
         /// <summary>
         /// Gets the subscription identifier.
         /// </summary>
@@ -55,7 +55,7 @@ namespace LogicAppCreator.Connectors
                     {
                         connectionId = $@"/subscriptions/{this.SubscriptionId}/resourceGroups/{this.ResourceGroupName}/providers/{this.ProviderName}/connections/{this.Type}",
                         connectionName = this.Name,
-                        id = $@"/subscriptions/{this.SubscriptionId}/providers/{this.ProviderName}/locations/{this.AzureRegion}/managedApis/{this.Type}"
+                        id = $@"/subscriptions/{this.SubscriptionId}/providers/{this.ProviderName}/locations/{this.AzureRegion.Name}/managedApis/{this.Type}"
                     }
                     )
                 );

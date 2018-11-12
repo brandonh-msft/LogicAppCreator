@@ -13,7 +13,7 @@ namespace LogicAppCreatorTests
         public void CheckTriggerOutput()
         {
             var la = new LogicApp()
-                .UsingConnector(new FtpConnector(@"ftp", "guidhere", AzureRegion.WestCentralUs, @"myrg"))
+                .UsingConnector(new FtpConnector(@"ftp", "guidhere", Microsoft.Azure.Management.ResourceManager.Fluent.Core.Region.USWestCentral, @"myrg"))
                 .WithTrigger(new FtpTriggerWhenFileIsAddedOrModified(@"ftp", @"foo/", 3, LogicAppCreator.RecurrenceOptions.General.Minute));
 
             CompareLogicAppToActual(la, @"{

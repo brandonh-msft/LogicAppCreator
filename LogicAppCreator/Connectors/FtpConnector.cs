@@ -9,7 +9,7 @@
         /// <summary>
         /// Gets the azure region.
         /// </summary>
-        protected override string AzureRegion { get; set; }
+        protected override Microsoft.Azure.Management.ResourceManager.Fluent.Core.Region AzureRegion { get; set; }
         /// <summary>
         /// Gets the name.
         /// </summary>
@@ -44,7 +44,7 @@
         /// <param name="subscriptionId">The subscription identifier.</param>
         /// <param name="azureRegion">The azure region.</param>
         /// <param name="resourceGroupName">Name of the resource group.</param>
-        public FtpConnector(string name, string subscriptionId, string azureRegion, string resourceGroupName)
+        public FtpConnector(string name, string subscriptionId, Microsoft.Azure.Management.ResourceManager.Fluent.Core.Region azureRegion, string resourceGroupName)
         {
             this.Name = name;
             this.SubscriptionId = subscriptionId;
